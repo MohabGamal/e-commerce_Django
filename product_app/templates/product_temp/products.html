@@ -1,0 +1,80 @@
+{%extends "n2_base.html"%}
+{%load static%}
+{%block body%}
+
+
+
+<div class="page-banner-area">
+<div class="container">
+<div class="page-banner-content d-flex justify-content-between">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">Shop</li>
+</ol>
+<h6 class="banner-title">Shop</h6>
+</div> 
+</div> 
+</div>
+
+
+<section class="category-page pt-40 pb-80">
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="product-filter d-sm-flex justify-content-between align-items-center">
+<div class="filter pt-10">
+<p class="text">Showing result of your search keyword "Dress"</p>
+</div>
+<div class="filter pt-10 d-flex align-items-center">
+<span class="sort">Sort by:</span>
+<select>
+<option value="0">Default sortion</option>
+<option value="1">popularity</option>
+<option value="2">Average ration</option>
+<option value="3">newness</option>
+<option value="4">price</option>
+</select>
+</div>
+</div>
+</div>
+</div> 
+
+<div class="row">
+{% for product in all_products %}  
+<div class="col-lg-3 col-md-6">
+<div class="product-card text-center mt-30">
+<div class="product-image">
+<img src={{  product.product_cover.url  }} alt="product">
+{% if product.tag == "New" %}
+<div class="sticker new"><span>NEW</span></div>
+{% elif product.tag == "Discount"%}  
+<div class="sticker discount"><span>HOT</span></div>
+{% elif product.tag == "Sale"%}
+<div class="sticker sale"><span>SALE</span></div>
+{% endif %}
+
+</div>
+
+<div class="product-content">
+<h5 class="product-name"><a href="product-details.html">{{product.title}}</a></h5>
+{% if product.discount%}
+<span class="price">${{product.price}}<del>${{product.discount}}</del></span>
+{% else %}
+<span class="price">${{product.price}}</span>
+{% endif %}
+<ul class="actions">
+<li><a href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="lni lni-eye"></i></a></li>
+<li><a href="#"><i class="lni lni-heart"></i></a></li>
+<li><a href="#"><i class="lni lni-shuffle"></i></a></li>
+</ul>
+</div>
+</div> 
+</div>
+{%endfor%}
+</div>
+
+</section>
+
+
+
+{%endblock%}
